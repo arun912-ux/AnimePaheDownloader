@@ -3,3 +3,6 @@ requests
 tqdm
 colorama
 simple_term_menu
+selenium
+simplejson
+enquiries

@@ -7,6 +7,7 @@ from colorama import Fore
 
 from simple_term_menu import TerminalMenu
 
+import enquiries
 
 
 # Function to extract anime titles and year to show in menu
@@ -43,9 +44,15 @@ if len(list_of_anime) == 0:
 # Display search results
 list_of_titles = get_titles_from_result(list_of_anime)
 
+# terminal_menu = TerminalMenu(menu_entries=list_of_titles)
+# choice = terminal_menu.show()
+
+
 # menu to select searched anime
-terminal_menu = TerminalMenu(menu_entries=list_of_titles)
-choice = terminal_menu.show()
+choice = enquiries.choose("Select Anime : ", list_of_titles)
+choice = list_of_titles.index(choice)
+
+
 # get the selected anime of choice
 selected_anime = list_of_anime[choice]
 
@@ -135,11 +142,14 @@ for key, value in episodes_data.items():
 
 # Input: Choose language and quality
 available_langs=list(episodes[episode_range[0]].keys())
-print("Languages Available :")
-terminal_menu = TerminalMenu(menu_entries=available_langs)
-lang = terminal_menu.show()
-lang = available_langs[lang]
 
+# print("Languages Available :")
+# terminal_menu = TerminalMenu(menu_entries=available_langs)
+# lang = terminal_menu.show()
+# lang = available_langs[lang]
+
+lang = enquiries.choose("Language Available : ", list(available_langs))
+print("Language : ", lang)
 
 available_quality = list(episodes[episode_range[0]][lang])
 # sorting the quality list to show the highest quality first
@@ -147,11 +157,13 @@ available_quality.sort(reverse=True)
 available_quality = [ str(i) for i in available_quality ]
 
 
-print("Quality Available :")
-terminal_menu = TerminalMenu(menu_entries=available_quality)
-quality = int(terminal_menu.show())
-quality = available_quality[quality]
+# print("Quality Available :")
+# terminal_menu = TerminalMenu(menu_entries=available_quality)
+# quality = int(terminal_menu.show())
+# quality = available_quality[quality]
 
+quality = enquiries.choose("Quality Available : ", available_quality)
+print("Quality :", quality+"p")
 
 # Update episodes dictionary to contain selected download link
 for key, items in episodes.items():
